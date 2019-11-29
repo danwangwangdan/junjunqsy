@@ -1,0 +1,66 @@
+<!--index.wxml-->
+<add-tips/>
+<view  style='margin-bottom:20rpx;margin-left:30rpx;margin-right:30rpx;'>
+  <ad unit-id="adunit-80d0374fe08db523" ad-type="video" ad-theme="white"></ad>
+  <!-- <ad unit-id="adunit-1326a258286277f4" ad-type="video" ad-theme="white"></ad> -->
+</view>
+<wux-notice-bar content="{{noticeIndex}}" />
+<view style='margin-top:20rpx;margin-left:40rpx;margin-right:40rpx;'>
+  <wux-alert bind:click="showPic" theme="stable" title="正确食用方式:" label="去短视频APP中点击分享按钮 -> 复制链接后返回到这里 -> 点击获取视频 -> 成功后存至相册 -> 广告支持" />
+  <view  style='margin-top:20rpx;margin-bottom:20rpx'>
+   <wux-alert theme="balanced" title="单链接支持:" label="{{status}}" />
+</view>
+  <wux-cell-group controlled >
+    <wux-cell hover-class="none">
+      <wux-input clear controlled placeholder="轻触以输入链接或去APP复制链接" bind:change="bindUrlValue" bind:clear="bindUrlClear" value="{{url}}" />
+    </wux-cell>
+  </wux-cell-group>
+  <view style='margin-top:30rpx;margin-left:30rpx;margin-right:30rpx;'>
+    <wux-button block size="default " bind:click="toDecode" type="balanced ">
+      <wux-icon type="md-color-wand " size="16 " /> 获取链接视频</wux-button>
+    <view>
+      <wux-row style='margin-top:-30rpx;'>
+        <wux-col span="5">
+          <wux-button wx:if="{{isTextNull==0}}" block size="default " outline bind:click="pasteUrl" type="balanced ">
+            <wux-icon type="md-copy" size="16 " /> 粘贴链接</wux-button>
+          <wux-button wx:if="{{isTextNull==1}}" block size="default " outline bind:click="bindUrlClear" type="balanced ">
+            <wux-icon type="md-trash" size="16 " /> 清空内容</wux-button>
+        </wux-col>
+        <wux-col span="2">
+        </wux-col>
+        <wux-col span="5">
+          <wux-button block size="default " outline openType='share' type="balanced ">
+            <wux-icon type="md-share " size="16 " /> 分享软件</wux-button>
+        </wux-col>
+      </wux-row>
+    </view>
+
+    <!-- <wux-button block size="default " outline openType='share' type="balanced ">
+      <wux-icon type="md-share " size="16 " /> 分享软件</wux-button> -->
+    <view>
+      <wux-row style='margin-top:-30rpx;'>
+        <wux-col span="5">
+          <wux-button block size="default" outline openType="contact" type="balanced">
+            <wux-icon type="ios-chatbubbles" size="16" /> 联系客服</wux-button>
+        </wux-col>
+        <wux-col span="2">
+        </wux-col>
+        <wux-col span="5">
+          <wux-button block size="default " outline bind:click="bindCash" type="balanced ">
+            <wux-icon type="ios-timer" size="16 " /> 打赏作者</wux-button>
+        </wux-col>
+      </wux-row>
+    </view>
+
+  </view>
+  <!--圆形点击框  -->
+  <!-- <view class="round-click">
+    <view bindtap="toPro" >备用通道</view>
+  </view> -->
+  <modal title="操作截图" hidden="{{modalHidden}}" bindconfirm="modalConfirm" bindcancel="modalCandel">
+    <view>
+      <image class="image" src="../../res/help.png" mode=''></image>
+    </view>
+    <view></view>
+  </modal>
+</view>
