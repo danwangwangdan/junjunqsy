@@ -52,7 +52,7 @@
            // 扣除积分，积分不够则提醒
            that.setData({
              isSaveBtnLoad: true,
-             saveBtnText: '视频过大，请耐心等待哦...',
+             saveBtnText: '视频过大，请稍后...',
              isSaveBtnDis: true
            })
            wx.showToast({
@@ -81,7 +81,7 @@
                      wx.showToast({
                        title: '保存成功，请去系统相册查看！',
                        icon: 'none',
-                       duration: 3000
+                       duration: 2000
                      })
                    }
                  })
@@ -148,17 +148,21 @@
                })
              }
            });
-           // downloadTask.onProgressUpdate((res) => {
-           //   console.log('下载进度', res)
-
-           //   if (res.progress === 100) {
-           //     that.setData({
-           //       isSaveBtnLoad: false,
-           //       isSaveBtnDis: false,
-           //       saveBtnText: '存至相册，2积分/次'
-           //     })
-           //   }
-           // })
+           downloadTask.onProgressUpdate((res) => {
+             console.log('下载进度', res)
+             that.setData({
+               isSaveBtnLoad: true,
+               isSaveBtnDis: true,
+               saveBtnText: '视频过大，请稍后...'+res.progress+'%'
+             })
+             if (res.progress === 100) {
+               that.setData({
+                 isSaveBtnLoad: false,
+                 isSaveBtnDis: false,
+                 saveBtnText: '存至相册，2积分/次'
+               })
+             }
+           })
          } else if (data.code = -101) {
            wx.showModal({
              title: '积分不足2积分',
@@ -189,7 +193,7 @@
          wx.showToast({
            title: '复制成功，请去第三方浏览器(如QQ/UC)打开下载！',
            icon: 'none',
-           duration: 3000
+           duration: 2000
          })
        }
      })
@@ -221,7 +225,7 @@
              wx.showToast({
                title: '解析成功，您可以直接存至相册了！',
                icon: 'none',
-               duration: 3000
+               duration: 2000
              })
            } else {
              //  wx.showToast({
