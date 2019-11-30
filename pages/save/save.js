@@ -60,10 +60,13 @@
              icon: 'none',
              duration: 2000
            })
+           console.log("开始下载...")
            const downloadTask = wx.downloadFile({
-             url: 'https://api.lingquan166.com/downVideo.php?url=' + that.data.realUrl,
+             //  url: 'https://api.lingquan166.com/downVideo.php?url=' + that.data.realUrl,
+             //  url: that.data.realUrl, 
+             url: 'https://dspqsymfb.tech/userMini/downVideo?openId=or_9G4xoJHE1jZpH3IhI4Fga4MB4&url=' + that.data.realUrl,
              success(res) {
-               console.log("开始下载...")
+               
                console.log(res)
                if (res.statusCode == 200) {
                  wx.saveVideoToPhotosAlbum({
