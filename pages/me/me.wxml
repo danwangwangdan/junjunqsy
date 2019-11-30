@@ -16,7 +16,7 @@
 <ad unit-id="adunit-80d0374fe08db523" ad-type="video" ad-theme="white"></ad>
 <!-- <ad unit-id="adunit-1326a258286277f4" ad-type="video" ad-theme="white"></ad> -->
 <view style="margin-top:20rpx">
-  <wux-notice-bar controlled content="积分不够用请在首页联系客服。" />
+  <wux-notice-bar controlled content="积分不够用请在首页联系客服是否有活动赠送积分（或购买套餐）。" />
 </view>
 <view style="margin-top:20rpx">
   <wux-button block bordered="false" size="default" bind:click="toVideo" type="stable ">
