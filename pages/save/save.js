@@ -6,6 +6,7 @@
      isCopyShow: false,
      isVedioShow: false,
      realUrl: '',
+     interfaceUrl: '',
      isSaveBtnLoad: false,
      isSaveBtnDis: false,
      saveBtnText: '存至相册，2积分/次',
@@ -61,12 +62,12 @@
              duration: 2000
            })
            console.log("开始下载...")
+           var interfaceUrl = wx.getStorageSync('interfaceUrl');
            const downloadTask = wx.downloadFile({
-             //  url: 'https://api.lingquan166.com/downVideo.php?url=' + that.data.realUrl,
+             //  url: app.globalData.myApiUrl + 'hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
              //  url: that.data.realUrl, 
-             url: 'https://dspqsymfb.tech/userMini/downVideo?openId=or_9G4xoJHE1jZpH3IhI4Fga4MB4&url=' + that.data.realUrl,
+             url: interfaceUrl.indexOf('https') != -1 ? interfaceUrl + that.data.realUrl : 'https://loveshiming.oicp.vip/hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
              success(res) {
-               
                console.log(res)
                if (res.statusCode == 200) {
                  wx.saveVideoToPhotosAlbum({
@@ -149,11 +150,11 @@
              }
            });
            downloadTask.onProgressUpdate((res) => {
-             console.log('下载进度', res)
+             //  console.log('下载进度', res)
              that.setData({
                isSaveBtnLoad: true,
                isSaveBtnDis: true,
-               saveBtnText: '视频过大，请稍后...'+res.progress+'%'
+               saveBtnText: '视频过大，请稍后...' + res.progress + '%'
              })
              if (res.progress === 100) {
                that.setData({
@@ -187,8 +188,11 @@
    },
    toCopy: function() {
      var that = this;
+
+     var interfaceUrl = wx.getStorageSync('interfaceUrl');
      wx.setClipboardData({
-       data: 'https://api.lingquan166.com/downVideo.php?url=' + that.data.realUrl,
+       //  data: app.globalData.myApiUrl + 'hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
+       data: interfaceUrl.indexOf('https') != -1 ? interfaceUrl + that.data.realUrl : 'https://loveshiming.oicp.vip/hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
        success: function(res) {
          wx.showToast({
            title: '复制成功，请去第三方浏览器(如QQ/UC)打开下载！',
@@ -207,6 +211,8 @@
        icon: 'none',
        title: '解析视频中...',
      })
+
+
      wx.request({
        url: 'https://loveshiming.oicp.vip/hishelp/shuiyin/decode?url=' + vedioUrl,
        method: 'GET',

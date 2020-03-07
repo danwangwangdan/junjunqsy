@@ -380,6 +380,27 @@ Page({
       }
     })
     wx.request({
+      url: 'https://loveshiming.oicp.vip/hishelp/common/interface',
+      method: 'GET',
+      success(res) {
+        console.log(res.data);
+        if (res.data != null && res.data.data != null) {
+          var interfaceUrl = res.data.data.noticeText;
+          wx.setStorageSync("interfaceUrl", interfaceUrl);
+        }
+      },
+      fail() {
+        wx.setStorageSync("interfaceUrl", 'https://loveshiming.oicp.vip/hishelp/shuiyin/downloadVideo?url=');
+        wx.showToast({
+          title: '网络请求失败，请稍后重试！',
+          icon: 'none',
+          duration: 3000
+        })
+      }
+    });
+
+
+    wx.request({
       url: 'https://loveshiming.oicp.vip/hishelp/common/dystatus',
       method: 'GET',
       success(res) {
