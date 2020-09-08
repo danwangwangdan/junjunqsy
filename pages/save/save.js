@@ -53,7 +53,7 @@
            // 扣除积分，积分不够则提醒
            that.setData({
              isSaveBtnLoad: true,
-             saveBtnText: '视频过大，请稍后...',
+             saveBtnText: '视频下载中，请稍后...',
              isSaveBtnDis: true
            })
            wx.showToast({
@@ -154,7 +154,7 @@
              that.setData({
                isSaveBtnLoad: true,
                isSaveBtnDis: true,
-               saveBtnText: '视频过大，请稍后...' + res.progress + '%'
+               saveBtnText: '视频下载中，请稍后...' + res.progress + '%'
              })
              if (res.progress === 100) {
                that.setData({
@@ -191,11 +191,11 @@
 
      var interfaceUrl = wx.getStorageSync('interfaceUrl');
      wx.setClipboardData({
-       //  data: app.globalData.myApiUrl + 'hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
-       data: interfaceUrl.indexOf('https') != -1 ? interfaceUrl + that.data.realUrl : 'https://loveshiming.oicp.vip/hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
+        data: app.globalData.myApiUrl + 'hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
+      //  data: interfaceUrl.indexOf('https') != -1 ? interfaceUrl + that.data.realUrl : 'https://loveshiming.oicp.vip/hishelp/shuiyin/downloadVideo?url=' + that.data.realUrl,
        success: function(res) {
          wx.showToast({
-           title: '复制成功，请去第三方浏览器(如QQ/UC)打开下载！',
+           title: '复制成功，请去第三方浏览器(如QQ浏览器)打开下载！',
            icon: 'none',
            duration: 2000
          })
